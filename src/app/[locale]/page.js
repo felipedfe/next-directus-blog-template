@@ -1,28 +1,37 @@
-import { getPosts } from '@/services/getPosts'
+import Link from 'next/link'
+import { getPosts } from '@/services/post'
+import { getAssetURL } from '@/services/directus'
+// o directus retorna uma hash da imagem no objeto do post. essa imagem tem quer acessada
+// pela url que está em getAssetURL
 
-export const revalidate = 60 // ← Atualiza a cada 60 segundos
+export const revalidate = 60 // atualiza a cada 60 segundos
 
 export default async function Home({ params }) {
   const posts = await getPosts(params.locale)
 
-console.log(posts)
+  console.log(params)
 
   return (
     <main>
       <h1>Blog ({params.locale})</h1>
       {posts.map(post => (
         <article key={post.id}>
-          <h2>{post.title}</h2>
-          {post.cover_image?.filename_disk && (
+          <h2>
+            <Link href={`/${params.locale}/posts/${post.slug}`}>
+              {post.title}
+            </Link>
+          </h2>
+
+          {post.cover_image && (
             <img
-              src={`http://localhost:8055/assets/${post.cover_image.filename_disk}`}
+              src={getAssetURL(post.cover_image)}
               alt={post.title}
-              style={{ width: '100%', maxWidth: 400 }}
+              style={{ width: '100%', maxWidth: 200 }}
             />
           )}
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
       ))}
+
     </main>
   )
 }
