@@ -22,7 +22,7 @@ export default async function PostPage({ params }) {
         //   style={{ width: '100%', maxWidth: 600 }}
         // />
         <Image
-          src={`${DIRECTUS_URL}/assets/${filename}`}
+          src={getAssetURL(post.cover_image)}
           width={400}
           height={300}
           unoptimized
