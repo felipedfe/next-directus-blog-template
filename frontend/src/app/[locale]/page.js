@@ -9,7 +9,7 @@ export const revalidate = 60 // atualiza a cada 60 segundos
 export default async function Home({ params }) {
   const posts = await getPosts(params.locale)
 
-  console.log(params)
+  console.log(posts)
   console.log("------>")
 
   return (

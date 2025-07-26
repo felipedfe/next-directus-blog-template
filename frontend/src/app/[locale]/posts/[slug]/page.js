@@ -1,5 +1,6 @@
 import { getPostBySlug } from '@/services/post'
 import { getAssetURL } from '@/services/directus'
+import Image from 'next/image'
 
 export const revalidate = 60
 
@@ -15,10 +16,17 @@ export default async function PostPage({ params }) {
       <h1>{post.title}</h1>
 
       {post.cover_image && (
-        <img
-          src={getAssetURL(post.cover_image)}
-          alt={post.title}
-          style={{ width: '100%', maxWidth: 600 }}
+        // <img
+        //   src={getAssetURL(post.cover_image)}
+        //   alt={post.title}
+        //   style={{ width: '100%', maxWidth: 600 }}
+        // />
+        <Image
+          src={`${DIRECTUS_URL}/assets/${filename}`}
+          width={400}
+          height={300}
+          unoptimized
+          alt="Imagem"
         />
       )}
 
