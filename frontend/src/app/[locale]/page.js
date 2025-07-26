@@ -10,6 +10,7 @@ export default async function Home({ params }) {
   const posts = await getPosts(params.locale)
 
   console.log(params)
+  console.log("------>")
 
   return (
     <main>

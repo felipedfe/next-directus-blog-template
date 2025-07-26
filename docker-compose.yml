@@ -32,3 +32,40 @@ services:
     volumes:
       - ./uploads:/directus/uploads
     restart: unless-stopped
+
+#Usar esse com as variáveis de ambiente em produção!!!
+
+# version: '3.8'
+
+# services:
+#   postgres:
+#     image: postgres:15
+#     restart: always
+#     environment:
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#       POSTGRES_DB: ${POSTGRES_DB}
+#     volumes:
+#       - ./postgres-data:/var/lib/postgresql/data
+
+#   directus:
+#     image: directus/directus:latest
+#     ports:
+#       - 8055:8055
+#     depends_on:
+#       - postgres
+#     environment:
+#       KEY: ${DIRECTUS_KEY}
+#       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+#       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+#       DB_CLIENT: pg
+#       DB_HOST: postgres
+#       DB_PORT: 5432
+#       DB_DATABASE: ${POSTGRES_DB}
+#       DB_USER: ${POSTGRES_USER}
+#       DB_PASSWORD: ${POSTGRES_PASSWORD}
+#       CORS_ENABLED: ${CORS_ENABLED}
+#       CORS_ORIGIN: ${CORS_ORIGIN}
+#     volumes:
+#       - ./uploads:/directus/uploads
+#     restart: unless-stopped
